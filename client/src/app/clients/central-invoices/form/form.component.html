@@ -1,0 +1,57 @@
+<p class="m-0">COMPANY</p>
+<p class="m-0">COMPANY NUMBER</p>
+<p class="m-0">00000000000000</p>
+<div class="mt-5 d-flex justify-content-between align-items-center py-3 border-top border-bottom">
+  <div>
+    <div class="d-flex">
+      <span>{{ 'CLIENT_NAME' | t }}</span>
+      <span>{{ ': ' + invoice.client.firstName + ' ' + invoice.client.lastName }}</span>
+    </div>
+    <div class="d-flex">
+      <span>{{ 'PHONE' | t }}</span>
+      <span>{{ ': ' + invoice.client.phone }}</span>
+    </div>
+    <div class="d-flex">
+      <span>{{ 'BUSINESS_NUMBER' | t }}</span>
+      <span>{{ ': ' + invoice.client.IDNumber }}</span>
+    </div>
+  </div>
+  <div class="text-center">
+    <p class="m-0">{{ 'INVOICE_NUMBER' | t }}</p>
+    <p class="m-0 bold">{{ invoice.number }}</p>
+  </div>
+  <div>
+    <div class="d-flex">
+      <span>{{ 'INVOICE_DATE' | t }}</span>
+      <span>{{ ': ' + invoice.date }}</span>
+    </div>
+    <div class="d-flex">
+      <span>{{ 'PRINT_DATE' | t }}</span>
+      <span>{{ ': ' + invoice.date }}</span>
+    </div>
+  </div>
+</div>
+<table class="table table-bordered my-5">
+  <thead>
+  <tr>
+    <th>{{ 'NUMBER' | t }}</th>
+    <th>{{ 'DATE' | t }}</th>
+    <th>{{ 'CLIENT' | t }}</th>
+    <th>{{ 'SUM' | t }}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of invoice.documents">
+    <td>{{ item.number }}</td>
+    <td>{{ item.date }}</td>
+    <td>{{ invoice.client.firstName + ' ' + invoice.client.lastName }}</td>
+    <td>{{ item.sum }}</td>
+  </tr>
+  </tbody>
+</table>
+<app-document-summary></app-document-summary>
+<div class="d-flex justify-content-end mt-5">
+  <button mat-button class="main-btn">{{ 'PRINT_ORIGINAL' | t }}</button>
+  <button mat-button class="secondary-btn mr-3">{{ 'PRINT_COPY' | t }}</button>
+</div>
+

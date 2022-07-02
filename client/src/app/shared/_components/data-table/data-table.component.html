@@ -1,0 +1,35 @@
+<p class="mb-3 title">{{ tableName | t }}</p>
+<ng-content select=".table-header"></ng-content>
+<ng-content select=".new-item-btn"></ng-content>
+<button mat-button class="main-btn" [routerLink]="formUrl" *ngIf="formUrl">פריט חדש</button>
+<div class="d-flex align-items-center" *ngIf="showSearch">
+  <mat-form-field>
+    <input matInput placeholder="{{'SEARCH' | t}}" [(ngModel)]="criteria.keyword" (keyup)="search($event)">
+    <i matSuffix class="fa fa-search pointer" (click)="search()"></i>
+  </mat-form-field>
+  <ng-content select=".criteria-field"></ng-content>
+  <ng-content select=".clear-filters-btn" *ngIf="isSearchActive"></ng-content>
+</div>
+<p class="alert alert-success mb-3" *ngIf="savedItem">{{ savedItem }} נשמר בהצלחה.</p>
+<div class="table-container">
+  <table class="table table-striped" [ngClass]="{ 'table-hover': isSelectable }">
+    <thead>
+    <tr>
+      <th *ngIf="hasCheckColumn" class="pointer table-header">
+        <mat-checkbox (change)="checkAll($event.checked)" [ngModel]="criteria.isCheckAll" *ngIf="items.length > 0 && !disableCheckAll"></mat-checkbox>
+      </th>
+      <th *ngFor="let column of columns" (click)="sort(column)" class="pointer table-header">
+        <span [matTooltip]="'מיין לפי ' + column.label">{{ column.label | t }}</span>
+        <i class="fa fa-caret-down mr-1" [@rotate]="rotateSortingIcon()" [@fade]="criteria.sort.column === column.name ? 'active' : 'inactive'"></i>
+      </th>
+      <th class="table-header text-center" *ngIf="hasActionsHeader">{{'ACTIONS' | t}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-content></ng-content>
+    </tbody>
+  </table>
+  <p *ngIf="items.length === 0" class="text-center bold">{{ isLoading ? ('LOADING' | t) : ('NO_ITEMS_TO_DISPLAY' | t) }}</p>
+<!--  <app-pagination [data]="paginationData" *ngIf="items.length > 0" [class]="paginationClass"></app-pagination>-->
+</div>
+

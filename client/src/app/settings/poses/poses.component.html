@@ -1,0 +1,17 @@
+<app-data-table tableName="{{ 'POINTS_OF_SALES' | t }}" [columns]="columns" [isSelectable]="true" (fetchItems)="fetchItems()">
+  <div class="text-left new-item-btn">
+    <button mat-button class="main-btn" (click)="newPos()">{{ 'NEW_POINTS_OF_SALES' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{item.id}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.internalNumber}}</td>
+    <td>{{item.decimalCircle}}</td>
+    <td>{{item.maxSaleAmount}}</td>
+    <td>{{item.limitSaleAmount}}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" class="fa fa-pencil-alt" [routerLink]="['/settings', 'pos-form', item.id]"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="delete(item)"></i>
+    </td>
+  </tr>
+</app-data-table>

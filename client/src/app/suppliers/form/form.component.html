@@ -1,0 +1,98 @@
+<form [formGroup]="supplierForm" (ngSubmit)="submit()">
+  <div class="d-flex justify-content-between mb-3">
+    <p class="title">{{ supplier ? supplier.name : 'NEW_SUPPLIER' | t }}</p>
+    <div>
+      <button mat-button class="main-btn" type="submit">{{ (supplier ? 'UPDATE' : 'SAVE') | t}}</button>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="card bg-light p-3 w-50">
+      <mat-form-field class="mb-2">
+        <input matInput type="text" [placeholder]="'SUPPLIER_NAME' | t" class="matInput" formControlName="name">
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="mb-2">
+        <input matInput type="text" [placeholder]="'SUPPLIER_NUMBER' | t" formControlName="internalNumber">
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="mb-2">
+        <input matInput type="text" [placeholder]="'BUSINESS_ID' | t" formControlName="businessNumber">
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="card bg-light p-3 w-50 mr-4">
+      <mat-form-field class="mb-2">
+        <input matInput type="text" [placeholder]="'ADDRESS' | t" formControlName="address">
+      </mat-form-field>
+      <mat-form-field class="mb-2">
+        <mat-select matinput [placeholder]="'SUPPLIER_CATEGORY' | t" formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mb-2">
+        <input matInput type="number" min="0" max="100" [placeholder]="'SUPPLIER_DISCOUNT' | t"
+               formControlName="discount">
+        <span matSuffix>%</span>
+        <mat-error>{{ errorMessages.percent  | t }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="mt-2">
+    <mat-checkbox formControlName="isLocked">{{ 'LOCKED_SUPPLIER' | t }}</mat-checkbox>
+  </div>
+  <div class="card bg-light p-3 mt-1">
+    <mat-form-field class="mb-2">
+      <input matInput type="number" min="0" [placeholder]="'PAYMENT_DUE' | t" formControlName="paymentDue">
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput type="number" min="0" max="100" [placeholder]="'CASH_DISCOUNT' | t" formControlName="cashDiscount">
+      <span matSuffix>%</span>
+      <mat-error>{{ errorMessages.percent | t }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="d-flex mt-4">
+    <div class="card bg-light w-50">
+      <div class="card-header bold">
+        <p class="f-18">{{ 'CONTACT_DETAILS_OFFICE' | t }}</p>
+      </div>
+      <div formGroupName="agent" class="p-3">
+        <mat-form-field class="mb-2">
+          <input matInput type="text" [placeholder]="'FULL_NAME' | t" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput type="text" [placeholder]="'PHONE' | t" formControlName="phone">
+        </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput type="text" [placeholder]="'EXTRA_PHONE' | t" formControlName="extraPhone">
+        </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput type="email" [placeholder]="'MAIL' | t" formControlName="email">
+          <mat-error>{{ errorMessages.email | t }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="card bg-light w-50 mr-4">
+      <div class="card-header bold">
+        <p class="f-18">{{ 'CONTACT_DETAILS_AGENT' | t }}</p>
+      </div>
+      <div formGroupName="office" class="p-3">
+        <mat-form-field class="mb-2">
+          <input matInput type="text" [placeholder]="'FULL_NAME' | t" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput type="text" [placeholder]="'PHONE' | t" formControlName="phone">
+        </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput type="text" [placeholder]="'EXTRA_PHONE' | t" formControlName="extraPhone">
+        </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput type="email" [placeholder]="'MAIL' | t" formControlName="email">
+          <mat-error>{{ errorMessages.email | t }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <mat-form-field class="card bg-light mt-4 p-3">
+    <textarea matInput formControlName="comments" [placeholder]="'COMMENTS' | t" rows="8"></textarea>
+  </mat-form-field>
+</form>

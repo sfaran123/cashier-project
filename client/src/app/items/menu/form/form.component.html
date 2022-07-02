@@ -1,0 +1,88 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div>
+    <p class="title">{{ menu ? menu.name :  'NEW_MENU' | t }}</p>
+    <div class="text-left">
+      <button mat-flat-button class="main-btn" type="submit">{{ 'SAVE' | t }}</button>
+    </div>
+  </div>
+  <div class="card bg-light p-4 mt-4">
+    <mat-form-field class="mb-2">
+      <input matInput type="text" [placeholder]="'NAME' | t" formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput type="number" [placeholder]="'SERIAL_NUMBER' | t" formControlName="serialNumber">
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput type="color" [placeholder]="'COLOR' | t" formControlName="color">
+    </mat-form-field>
+  </div>
+  <div>
+    <p class="sub-title mt-4">כאן ניתן להקים תת-תפריטים</p>
+    <p class="f-18 px-3">תת-תפריטים שמוסיפים כאן יופיעו בתוך התפריט שממנו הקמנו אותם</p>
+  </div>
+  <div class="card">
+    <div class="card-header bold">תתי תפריטים שיופיעו בתוך התפריט</div>
+    <div class="bg-light p-4" formArrayName="subMenus">
+      <div class="d-flex" *ngFor="let subMenus of subMenus.controls; let index = index" [formGroupName]="index.toString()">
+        <mat-form-field class="mb-2">
+          <input matInput type="text" [placeholder]="'NAME' | t" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="mb-2 mr-5">
+          <input matInput type="text" [placeholder]="'SERIAL_NUMBER' | t" formControlName="serialNumber">
+        </mat-form-field>
+        <mat-form-field class="mb-2 mr-5">
+          <input matInput type="color" [placeholder]="'COLOR' | t" formControlName="color">
+        </mat-form-field>
+        <div class="mt-4 mr-4">
+          <i class="fa fa-trash pointer primary-text-color" (click)="removeSubMenu(index)"></i>
+          <i class="fa fa-pencil-alt pointer primary-text-color mr-3" (click)="editSubMenu(index)"></i>
+        </div>
+      </div>
+      <div class="text-left">
+        <i class="fa fa-plus pointer" [matTooltip]="'NEW_SUB_MENU' | t" (click)="addSubMenu()"></i>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p class="sub-title mt-4">כאן ניתן לשייך פריטים לתפריט</p>
+    <p class="f-18 px-3">פריטים שמוסיפים כאן יופיעו בתוך התפריט (ברגע שלוחתים עם טפריט זה במסך הקופה)</p>
+  </div>
+  <div class="card bg-light">
+    <div class="card-header bold">פריטים שיופועי בתוך התפריט</div>
+    <div formArrayName="menuItems" class="p-4 mt-4">
+      <div class="d-flex" *ngFor="let menuItem of menuItems.controls; let index = index" [formGroupName]="index.toString()">
+        <mat-form-field class="mb-2">
+          <mat-select matInput [placeholder]="'CODE' | t" formControlName="id" (selectionChange)="onSelect(index, $event, 'id')">
+            <mat-option *ngFor="let item of items" [value]="item.id">
+              {{ item.id + ' ' + item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mb-2 mr-5">
+          <mat-select matInput [placeholder]="'CODE' | t" formControlName="id" (selectionChange)="onSelect(index, $event, 'id')">
+            <mat-option *ngFor="let item of items" [value]="item.id">
+              {{ item.code }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mb-2 mr-5">
+          <mat-select matInput [placeholder]="'ITEM_DESCRIPTION' | t" formControlName="id" (selectionChange)="onSelect(index, $event, 'name')">
+            <mat-option *ngFor="let item of items" [value]="item.id">
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mb-2 mr-5">
+          <input matInput type="number" [placeholder]=" 'SERIAL_NUMBER' | t" formControlName="serialNumber">
+        </mat-form-field>
+        <mat-form-field class="mb-2 mr-5">
+          <input matInput type="color" [placeholder]="'COLOR' | t" formControlName="color">
+        </mat-form-field>
+        <i class="fa fa-trash pointer primary-text-color mt-4 mr-4" (click)="removeSubMenu(index)"></i>
+      </div>
+      <div class="text-left">
+        <i class="fa fa-plus pointer" [matTooltip]="'NEW_MENU_ITEM' | t" (click)="addMenuItem()"></i>
+      </div>
+    </div>
+  </div>
+</form>

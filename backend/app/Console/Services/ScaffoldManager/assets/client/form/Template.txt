@@ -1,0 +1,5 @@
+<form #form="ngForm" (ngSubmit)="submit(form)">
+    <div class="text-center">
+        <button mat-flat-button type="submit" class="black-btn rounded-btn">שמור</button>
+    </div>
+</form>

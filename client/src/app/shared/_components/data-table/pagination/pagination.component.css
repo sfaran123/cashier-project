@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+span {
+	margin: 8px 0 0 4px;
+	font-size: 14px;
+}
+
+#pages {
+  background-color: #fff;
+}
+
+.page-link {
+  color: #3eaf61;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background-color: #e9ecef;
+}
+
+.page-link.active {
+  color: #fff;
+  border-color: #3eaf61;
+  background-color: #3eaf61;
+}
+
+@media (min-width: 992px) {
+  :host {
+    justify-content: flex-end;
+  }
+}

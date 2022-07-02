@@ -1,0 +1,26 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { DataTableModule } from 'src/app/_shared/components/data-table/data-table.module';
+
+import { UcModelsComponent } from './lcModels.component';
+
+import { UcModelService } from 'src/app/_shared/services/http/lcModel.service';
+
+const routes: Routes = [
+	{
+		path: '',
+		component: UcModelsComponent
+	},
+	{ path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) }
+];
+
+@NgModule({
+	declarations: [UcModelsComponent],
+	imports: [
+		RouterModule.forChild(routes),
+		DataTableModule
+	],
+	providers: [UcModelService]
+})
+export class UcModelsModule {}

@@ -1,0 +1,14 @@
+<form #form="ngForm" (ngSubmit)="submit(form)">
+  <div class="d-flex justify-content-between">
+    <p class="primary-text-color bold f-18 text-center">{{ group.id ? group.name : 'NEW_GROUP' | t }}</p>
+    <i class="fa fa-times" mat-dialog-close></i>
+  </div>
+  <mat-form-field class="mt3">
+    <input matInput type="text" [placeholder]="'NAME' | t" name="name" [(ngModel)]="group.name">
+    <mat-error>{{ errorMessages.required | t }}</mat-error>
+  </mat-form-field>
+  <div class="d-flex justify-content-around mt-4">
+    <button mat-flat-button class="grey-btn" mat-dialog-close>{{ 'CANCEL' | t }}</button>
+    <button mat-flat-button class="main-btn" type="submit">{{ (group.id ? 'UPDATE'  : 'SAVE') | t }}</button>
+  </div>
+</form>

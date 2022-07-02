@@ -1,0 +1,12 @@
+<app-data-table [tableName]="'CENTRAL_INVOICE_ISSUING' | t" [columns]="columns" [hasActionsHeader]="true" (fetchItems)="fetchItems()">
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{ item.IDNumber }}</td>
+    <td>{{ item.number }}</td>
+    <td>{{ item.firstName }}</td>
+    <td>{{ item.lastName }}</td>
+    <td>{{ item.sum }}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'ISSUE_CENTRAL_INVOICE' | t" class="fa fa-file-invoice-dollar" [routerLink]="['./form', item.id]"></i>
+    </td>
+  </tr>
+</app-data-table>

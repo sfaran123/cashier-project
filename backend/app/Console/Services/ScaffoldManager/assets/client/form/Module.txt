@@ -1,0 +1,41 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+
+import { FormComponent } from './form.component';
+
+import { UcModelService } from 'src/app/_shared/services/http/lcModel.service';
+
+import { UcModelResolve } from 'src/app/_shared/resolves/lcModel.resolve';
+
+const routes: Routes = [
+	{
+		path: '',
+		component: FormComponent
+	},
+	{
+		path: ':id',
+		component: FormComponent,
+		resolve: { lcModel: UcModelResolve }
+	}
+];
+
+@NgModule({
+	declarations: [FormComponent],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(routes),
+		FormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatSelectModule,
+		MatButtonModule
+	],
+	providers: [UcModelService, UcModelResolve]
+})
+export class FormModule {}

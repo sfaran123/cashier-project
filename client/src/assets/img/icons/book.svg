@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="63" height="84" viewBox="0 0 63 84">
+    <defs>
+        <style>
+            .cls-1{fill:#37b245}
+        </style>
+    </defs>
+    <g id="invoice" transform="translate(-64)">
+        <g id="Group_5576" data-name="Group 5576" transform="translate(64)">
+            <g id="Group_5575" data-name="Group 5575">
+                <path id="Path_9006" d="M126.487 18.013l-17.5-17.5A1.749 1.749 0 0 0 107.75 0H71a7.008 7.008 0 0 0-7 7v70a7.008 7.008 0 0 0 7 7h49a7.008 7.008 0 0 0 7-7V19.25a1.749 1.749 0 0 0-.513-1.237zM109.5 5.975L121.025 17.5H113a3.5 3.5 0 0 1-3.5-3.5zM123.5 77a3.5 3.5 0 0 1-3.5 3.5H71a3.5 3.5 0 0 1-3.5-3.5V7A3.5 3.5 0 0 1 71 3.5h35V14a7.008 7.008 0 0 0 7 7h10.5z" class="cls-1" data-name="Path 9006" transform="translate(-64)"/>
+                <path id="Path_9007" d="M168.25 298.667h-38.5a1.75 1.75 0 1 0 0 3.5h38.5a1.75 1.75 0 1 0 0-3.5z" class="cls-1" data-name="Path 9007" transform="translate(-117.5 -249.667)"/>
+                <path id="Path_9008" d="M168.25 234.667h-38.5a1.75 1.75 0 1 0 0 3.5h38.5a1.75 1.75 0 1 0 0-3.5z" class="cls-1" data-name="Path 9008" transform="translate(-117.5 -196.167)"/>
+                <path id="Path_9009" d="M168.25 362.667h-38.5a1.75 1.75 0 1 0 0 3.5h38.5a1.75 1.75 0 1 0 0-3.5z" class="cls-1" data-name="Path 9009" transform="translate(-117.5 -303.167)"/>
+                <path id="Path_9010" d="M150.75 426.667h-21a1.75 1.75 0 1 0 0 3.5h21a1.75 1.75 0 1 0 0-3.5z" class="cls-1" data-name="Path 9010" transform="translate(-117.5 -356.667)"/>
+                <path id="Path_9011" d="M234.667 172.416a1.749 1.749 0 0 0 1.75 1.75h21a1.75 1.75 0 1 0 0-3.5h-21a1.749 1.749 0 0 0-1.75 1.75z" class="cls-1" data-name="Path 9011" transform="translate(-206.667 -142.666)"/>
+                <path id="Path_9012" d="M133.25 90.415h-3.5a1.75 1.75 0 0 0 0 3.5h1.75a1.75 1.75 0 0 0 3.5 0v-.322a5.237 5.237 0 0 0-1.75-10.178 1.75 1.75 0 1 1 0-3.5h3.5a1.75 1.75 0 1 0 0-3.5H135a1.75 1.75 0 1 0-3.5 0v.322a5.237 5.237 0 0 0 1.75 10.178 1.75 1.75 0 0 1 0 3.5z" class="cls-1" data-name="Path 9012" transform="translate(-117.5 -62.415)"/>
+            </g>
+        </g>
+    </g>
+</svg>

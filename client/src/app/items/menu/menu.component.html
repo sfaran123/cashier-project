@@ -1,0 +1,20 @@
+<app-data-table [columns]="columns" tableName="תַפרִיטים" [hasActionsHeader]="true" (fetchItems)="fetchItems()">
+  <div class="new-item-btn">
+    <p class="f-20">כפתורים במסך הראשי של קופה</p>
+    <div class="text-left">
+      <button mat-button class="main-btn m-1" routerLink="./form" >{{ 'MAIN_SCREEN_MENUS' | t }}</button>
+      <button mat-button class="secondary-btn m-1" routerLink="./menu-items">{{ 'NEW_ITEM_TO_MAIN_SCREEN' | t }}</button>
+    </div>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{ item.name }}</td>
+    <td>{{ item.serialNumber }}</td>
+    <td>
+      <div [ngStyle]="{ backgroundColor: item.color }" class="p-2"></div>
+    </td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" class="fa fa-pencil-alt ml-3" [routerLink]="['./form', item.id]"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="deleteMenu(item.id)"></i>
+    </td>
+  </tr>
+</app-data-table>

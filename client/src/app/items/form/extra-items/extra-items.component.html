@@ -1,0 +1,23 @@
+<form [formGroup]="extraItemsForm">
+  <p class="mt-5 bold border-bottom">{{ 'ITEM_EXTRAS' | t }}</p>
+  <button mat-button class="main-btn" type="button" (click)="addItem()">{{ 'ADD_ITEM' | t }}</button>
+  <div formArrayName="items" cdkDropList class="dnd-list mt-3" (cdkDropListDropped)="drop($event)">
+    <div class="dnd-box d-flex align-items-center w-fit-content" *ngFor="let item of items.controls; let i = index" [formGroupName]="i" cdkDrag>
+      <i cdkDragHandle class="fa fa-bars ml-3 grey-text pointer"></i>
+      <mat-form-field>
+        <mat-select [placeholder]="'ITEM_CODE' | t" formControlName="code" (selectionChange)="selectItem(i, $event.value, 'name')">
+          <mat-option *ngFor="let item of extraItemsSelect" [value]="item.code">{{ item.code }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mr-5">
+        <mat-select [placeholder]="'ITEM_DESCRIPTION' | t" formControlName="name" (selectionChange)="selectItem(i, $event.value, 'code')">
+          <mat-option *ngFor="let item of extraItemsSelect" [value]="item.name">{{ item.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mr-5">
+        <input matInput type="number" [placeholder]=" 'PRICE' | t" formControlName="price">
+      </mat-form-field>
+      <i [matTooltip]="'DELETE_ITEM' | t" class="fa fa-trash pointer primary-text-color mr-4" (click)="removeGroup(i)"></i>
+    </div>
+  </div>
+</form>

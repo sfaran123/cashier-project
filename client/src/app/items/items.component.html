@@ -1,0 +1,27 @@
+<app-data-table [columns]="columns" [hasActionsHeader]="true" [tableName]="'ITEM_LIST' | t" [isSelectable]="true" (fetchItems)="fetchItems()">
+  <div class="table-header text-left">
+    <button mat-button class="main-btn ml-3" [matMenuTriggerFor]="createMenu">{{ 'EXCEL' | t }}</button>
+    <mat-menu #createMenu="matMenu">
+      <button mat-menu-item (click)="downloadExampleFile()">{{ 'DOWNLOAD_EXCEL_EXAMPLE' | t }}</button>
+      <button mat-menu-item (click)="fileInput.click()">{{ 'UPLOAD_EXCEL' | t }}</button>
+    </mat-menu>
+    <input type="file" class="d-none" (change)="upload($event.target.files[0])" #fileInput>
+    <button mat-button class="main-btn" routerLink="./form">{{ 'NEW_ITEM' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{ item.code }}</td>
+    <td>{{ item.description }}</td>
+    <td>{{ item.supplier ? item.supplier : '-' }}</td>
+    <td>{{ item.category ? item.category : '-' }}</td>
+    <td>{{ item.subCategory ? item.subCategory : '-' }}</td>
+    <td>{{ calculateVat(item, true) | number: '1.2-2'  }}</td>
+    <td>{{ calculateVat(item, false) | number: '1.2-2' }}</td>
+    <td>{{ item.customerPrice }}</td>
+    <td>% {{ profitPercentage(item) | number: '1.2-2' }}</td>
+    <td>{{ item.unitsInStock }}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" class="fa fa-pencil-alt" [routerLink]="['/items', 'form', item.id]"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="deleteItem(item.id)"></i>
+    </td>
+  </tr>
+</app-data-table>

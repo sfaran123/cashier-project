@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark white-text mb-4" >
+  <div *ngFor="let link of links">
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="userIsAuthenticated">{{ link.label | t }}</button>
+    <mat-menu #menu="matMenu">
+      <button *ngFor="let subLink of link.links" mat-menu-item [routerLink]="subLink.url ? [link.url, subLink.url] : link.url">{{ subLink.label | t }}</button>
+    </mat-menu>
+  </div>
+  <div class="d-flex justify-content-end w-100">
+    <button class="btn btn-outline-success ml-2" mat-button [matMenuTriggerFor]="menu">{{ 'REGISTRATION' | t }}</button>
+    <mat-menu #menu="matMenu">
+      <button *ngIf="!userIsAuthenticated" mat-menu-item [routerLink]="'login'">{{ 'LOGIN' | t }}</button>
+      <button *ngIf="!userIsAuthenticated" mat-menu-item [routerLink]="'signup'">{{ 'SIGNUP' | t }}</button>
+      <button *ngIf="userIsAuthenticated" mat-menu-item (click)="onLogout()">{{ 'LOGOUT' | t }}</button>
+    </mat-menu>
+    <button class="btn btn-outline-success" mat-button [matMenuTriggerFor]="langMenu">{{ langCods[lang] }}</button>
+    <mat-menu #langMenu="matMenu">
+      <button *ngFor="let lang of languages" (click)="changeLang(lang.name)" mat-menu-item>{{ lang.label }}</button>
+    </mat-menu>
+  </div>
+</nav>
+
+

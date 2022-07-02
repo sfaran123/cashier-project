@@ -1,0 +1,17 @@
+<app-data-table [columns]="columns" [hasActionsHeader]="true" tableName="{{ 'SETS_LIST' | t }}" [isSelectable]="true" (fetchItems)="fetchItems()">
+  <div class="table-header text-left">
+    <button mat-button class="main-btn" routerLink="./form">{{ 'NEW_SET' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{ item.code }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.category ? item.category : '-' }}</td>
+    <td>{{ item.subCategory ? item.subCategory : '-' }}</td>
+    <td>{{ item.price }}</td>
+    <td>{{ item.groupsCount }}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" class="fa fa-pencil-alt" [routerLink]="['/items', 'sets', 'form', item.id]"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="deleteItem(item.id)"></i>
+    </td>
+  </tr>
+</app-data-table>

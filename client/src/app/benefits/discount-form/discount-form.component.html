@@ -1,0 +1,58 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="mb-3">
+    <p class="f-18">הנחה חדשה</p>
+    <mat-form-field class="mb-2">
+      <input matInput type="text" placeholder="קוד הנחה" formControlName="code" required>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput type="text" placeholder="שם הנחה" formControlName="name" required>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput placeholder="אחוז ההנחה" formControlName="approvedPercentage" required>
+      <span matSuffix>%</span>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput placeholder="אחוז מאושר למנהל" formControlName="managerPercentage" required>
+      <span matSuffix>%</span>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <mat-select matInput placeholder="סוג הנחה" formControlName="type">
+        <mat-option [value]="'item'">הנחה על פריט</mat-option>
+        <mat-option [value]="'general'">הנחה כללית לחשבון</mat-option>
+      </mat-select>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput type="text" placeholder="סכום הנחה מינימלי" formControlName="minPrice" required>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="isDuplicated">
+      אפשר כפל ביחד עם מבצעים
+    </mat-checkbox>
+    <br>
+    <mat-checkbox formControlName="onlyClubMembers">
+      רק לחברי מועדון
+    </mat-checkbox>
+    <br>
+    <mat-form-field class="mb-2">
+      <input matInput type="date" placeholder="הנחה פעילה מתאריך" formControlName="activeFrom" required>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <input matInput type="date" placeholder="הנחה פעילה עד תאריך" formControlName="activeAt" required>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="onlyClubMembers">
+      הנחה מופעלת
+    </mat-checkbox>
+    <div class="text-left">
+      <button mat-flat-button color="primary" type="submit">שלח</button>
+      <button mat-flat-button class="btn-danger" type="submit">ביטול</button>
+    </div>
+  </div>
+</form>

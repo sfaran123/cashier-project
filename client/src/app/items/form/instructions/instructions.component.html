@@ -1,0 +1,24 @@
+<p class="mt-5 bold border-bottom">{{ 'ITEM_INSTRUCTIONS' | t }}</p>
+<div class="d-flex align-items-baseline">
+  <bd-select [(ngModel)]="selectedInstruction">
+    <bd-option *ngFor="let instruction of instructions" [value]="instruction">{{ instruction.name }}</bd-option>
+  </bd-select>
+  <span class="d-flex align-items-baseline mr-3 primary-text-color pointer" (click)="addInstruction()">
+    <i class="fa fa-plus"></i>
+    <span class="mr-3">{{ 'ADD_TO_ITEM' | t }}</span>
+  </span>
+</div>
+<div cdkDropList class="dnd-list mt-3" (cdkDropListDropped)="dropInstruction($event)">
+  <div class="dnd-box w-300p p-0" *ngFor="let instruction of selectedInstructions; let index = index" cdkDrag>
+    <div class="color-stripe" [ngStyle]="{ backgroundColor: instruction.color }"></div>
+    <div class="d-flex justify-content-between col-12 align-items-center p-3">
+      <div class="d-flex align-items-center">
+        <mat-checkbox class="mt-1" [checked]="instruction.isDefault" disabled></mat-checkbox>
+        <span class="primary-text-color bold">{{ instruction.name }}</span>
+      </div>
+      <div class="text-left primary-text-color">
+        <i class="fa fa-trash pointer" [matTooltip]="'DELETE' | t" (click)="deleteInstruction(index)"></i>
+      </div>
+    </div>
+  </div>
+</div>

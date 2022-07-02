@@ -1,0 +1,118 @@
+<p class="title">{{ item ? 'UPDATE_ITEM' : 'NEW_ITEM' | t }}</p>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>{{ 'BASIC_SETTINGS' | t }}</ng-template>
+    <form [formGroup]="itemForm" (ngSubmit)="submit()" class="mt-2">
+      <div class="d-flex justify-content-between mt-4">
+        <p class="f-18 bold">{{ 'ITEM_BASIC_SETTINGS' | t }}</p>
+        <div>
+          <button mat-button class="main-btn" type="submit">{{ (item ?'UPDATE' : 'SAVE') | t }}</button>
+        </div>
+      </div>
+      <div class="d-flex mt-4">
+        <div class="card bg-light py-3 px-5 w-50">
+          <mat-form-field>
+            <input matInput [placeholder]="'ITEM_CODE' | t" maxlength="13" formControlName="code" type="text" required>
+            <mat-error *ngIf="itemForm.get('code').errors?.required">{{ errorMessages.required }}</mat-error>
+            <mat-error *ngIf="itemForm.get('code').errors?.exists">{{ 'CODE_EXISTS' | t }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'ITEM_DESCRIPTION' | t" formControlName="description" type="text" required>
+            <mat-error>{{ errorMessages.required }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'CUSTOMER_PRICE' | t" (keyup)="updateStorePrice()" formControlName="customerPrice" type="number" required>
+            <mat-error>{{ errorMessages.required }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input [placeholder]="'COST_PRICE' | t" matInput formControlName="costPrice" type="number">
+          </mat-form-field>
+          <mat-checkbox matInput formControlName="includesVat">{{ 'COST_PRICE_INCLUDING_VAT' | t }}</mat-checkbox>
+          <!--      todo calculate use service-->
+          <!--      <mat-form-field class="p-3">-->
+          <!--        <input placeholder='מחיר עלות כולל מע"ם' matInput type="number">-->
+          <!--      </mat-form-field>-->
+        </div>
+        <div class="card bg-light py-3 px-5 w-50 mr-4">
+          <mat-form-field>
+            <input matInput [placeholder]="'MIN_CHAIN_AMOUNT' | t" formControlName="minChainAmount" type="number">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'MAX_CHAIN_AMOUNT' | t" formControlName="maxChainAmount" type="number">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'MIN_STORE_AMOUNT' | t" formControlName="minStoreAmount" type="number">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'MAX_STORE_AMOUNT' | t" formControlName="maxStoreAmount" type="number">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="d-flex mt-4">
+        <div class="card bg-light py-3 px-5 w-50">
+          <mat-form-field>
+            <mat-select matInput [placeholder]="'MAIN_CATEGORY' | t" [(ngModel)]="selectedCategoryId" (selectionChange)="setSubCategories()" formControlName="categoryId">
+              <mat-option *ngFor="let category of categories, let i = index" [value]="category.id">{{ category.name }}</mat-option>
+            </mat-select>
+            <mat-error>{{ errorMessages.required }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select matInput [placeholder]="'SUB_CATEGORY' | t" formControlName="subCategoryId">
+              <mat-option *ngFor="let category of subCategories" [value]="category.id">{{ category.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select matInput [placeholder]="'SUPPLIER' | t" formControlName="supplierId">
+              <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">{{ supplier.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'ITEM_CODE_AT_SUPPLIER' | t" formControlName="supplierItemCode" type="text">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" min="0" max="100" [placeholder]="'PERCENTAGE_DISCOUNT_TO_COST_PRICE' | t" formControlName="costPriceDiscount">
+            <span matSuffix>%</span>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'PRICE_IN_THE_STORE' | t" formControlName="costInStore" type="number" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'ADDITIONAL_TEXT_TO_BE_PRINTED_IN_THE_BON' | t" formControlName="bonAdditionalText" type="text">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'ITEM_AVAILABLE_FOR_SALE_STARTING_DATE' | t" formControlName="availableFrom" type="date">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="'THE_ITEM_IS_AVAILABLE_FOR_SALE_UNTIL_THE_DATE' | t" formControlName="availableTo" type="date">
+          </mat-form-field>
+        </div>
+        <div class="card bg-light py-3 px-5 w-50 mr-4 justify-content-around">
+          <mat-checkbox formControlName="isWeighable">{{ 'IS_WEIGHABLE' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="isTaxed">{{ 'IS_TAXED' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="isRenameEnabled">{{ 'THE_ITEM_IS_RENAMED' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="requiresManager">{{ 'ITEM_REQUIRE_ADMINISTRATOR_PASSWORD_FOR_SALE' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="isAdditionalPercentage">{{ 'THE_PRICE_OF_THE_ITEM_IS_AN_ADDITIONAL_PERCENTAGE_TO_THE_BILL' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="isInventoryManager">{{ 'MANAGED_ITEM_IN_INVENTORY' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="allowPriceZero">{{ 'ALLOW_ZERO_PRICE' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="isExtra">{{ 'IS_EXTRA' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="notDiscountable">{{ 'NOT_DISCOUNTABLE' | t }}</mat-checkbox>
+          <mat-checkbox formControlName="isLockedForSale">{{ 'IS_LOCKED' | t }}</mat-checkbox>
+        </div>
+      </div>
+      <div class="card bg-light mt-4 w-50">
+        <p class="card-header bold">{{ 'INVENTORY_ENTRY' | t }}</p>
+        <mat-form-field class="card-body">
+          <input matInput formControlName="unitsInStock" [placeholder]="'INITIAL_INVENTORY' | t" type="number">
+          <mat-error>{{ errorMessages.required }}</mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>{{ 'EXTRA_SETTINGS' | t }}</ng-template>
+    <app-instructions [instructions]="instructions" [selectedInstructions]="item ? item.instructions : []"></app-instructions>
+    <app-extra-items [selectedExtraItems]="item ? item.extraItems : []" [extraItemsSelect]="itemsSelect"></app-extra-items>
+    <app-customer-prices [customers]="customers" [customerPrices]="item ? item.customerPrices : []"></app-customer-prices>
+    <app-sub-items [subItems]="item ? item.subItems : []"></app-sub-items>
+  </mat-tab>
+</mat-tab-group>

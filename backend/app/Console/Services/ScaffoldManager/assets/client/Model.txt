@@ -1,0 +1,4 @@
+export class UcModelModel {
+	id: number;
+	name: string;
+}

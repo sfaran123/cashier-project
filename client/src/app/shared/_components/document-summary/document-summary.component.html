@@ -1,0 +1,23 @@
+<div class="card bg-light mt-5">
+  <div class="card-header">{{ 'DOCUMENT_SUMMARY' | t }}</div>
+  <div class="card-body">
+    <div class="d-flex align-items-center justify-content-around">
+        <span>
+          <span class="bold">{{ 'SUM:  ' }}</span>
+          <span>{{ documentForm.get('sum').value }}</span>
+        </span>
+      <span>
+          <span class="bold">{{ 'SUM_PRE_VAT:  ' }}</span>
+          <span>{{ documentForm.get('sumPreVat').value }}</span>
+        </span>
+      <span>
+          <span class="bold">{{ 'VAT:  ' }}</span>
+          <span>{{ documentForm.get('calculatedVat').value }}</span>
+        </span>
+      <span>
+          <span class="bold">{{ 'SUM_TO_PAY:  ' }}</span>
+          <span>{{ documentForm.get('sumToPay').value }}</span>
+        </span>
+    </div>
+  </div>
+</div>

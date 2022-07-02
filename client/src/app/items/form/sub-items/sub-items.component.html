@@ -1,0 +1,24 @@
+<form [formGroup]="subItemsForm" class="mt-4">
+  <p class="mt-5 bold border-bottom">{{ 'SUB_ITEMS' | t }}</p>
+  <i class="fa fa-plus primary-text-color pointer" [matTooltip]="'ADD_A_SUB_ITEM' | t" (click)="addItem()"></i>
+  <div class="d-flex p-2">
+    <div formArrayName="items">
+      <div class="d-flex align-items-baseline" *ngFor="let subItem of items.controls; let i = index" [formGroupName]="i">
+        <mat-form-field>
+          <input matInput [placeholder]="'BARCODE' | t" formControlName="barcode" maxlength="13" type="text">
+        </mat-form-field>
+        <mat-form-field class="mr-3">
+          <input matInput [placeholder]="'COLOR' | t" formControlName="color" type="text">
+        </mat-form-field>
+        <mat-form-field class="mr-3">
+          <input matInput [placeholder]="'MEASURE' | t" formControlName="size" type="text">
+        </mat-form-field>
+        <mat-form-field class="mr-3">
+          <input matInput formControlName="unitsInStock" placeholder="{{ 'INITIAL_INVENTORY' | t }}" type="number">
+        </mat-form-field>
+        <i class="fa fa-trash primary-text-color pointer mr-3" (click)="removeSubItem(i)"></i>
+      </div>
+      <p *ngIf="items.controls.length === 0">{{ 'NO_SUB_ITEMS_ADDED' }}</p>
+    </div>
+  </div>
+</form>

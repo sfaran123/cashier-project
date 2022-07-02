@@ -1,0 +1,28 @@
+<p class="bold text-center primary-text-color f-20">{{ 'GROUPS_LIST' | t }}</p>
+<p class="bold text-center f-14">{{ 'ADD_GROUPS_TO_YOUR_ITEMS_SET' | t }}</p>
+<mat-form-field class="w-50 mx-2">
+  <input matInput [placeholder]="'SEARCH' | t" [(ngModel)]="searchWord" (keyup)="search()">
+  <i matSuffix class="fa fa-search pointer" (click)="search()"></i>
+</mat-form-field>
+<table class="table table-bordered mt-4 table-height">
+  <thead>
+  <tr>
+    <th></th>
+    <th scope="col">{{ 'NAME' | t }}</th>
+    <th scope="col">{{ 'ITEMS_COUNT' | t }}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let group of groups">
+    <td>
+      <mat-checkbox (change)="selectGroup($event.checked, group)" [checked]="group.checked"></mat-checkbox>
+    </td>
+    <td>{{ group.name }}</td>
+    <td>{{ group.itemsCount }}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-around mt-4">
+  <button mat-button mat-dialog-close class="grey-btn">{{ 'CANCEL' | t }}</button>
+  <button mat-button class="main-btn" (click)="submit()">{{ 'ADD' | t }}</button>
+</div>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
+    <defs>
+        <style>
+            .cls-1{fill:#67676d}
+        </style>
+    </defs>
+    <g id="send-button">
+        <g id="send">
+            <path id="Path_5160" d="M28 62.25l-28-12 28-12v9.333L8 50.25l20 2.667z" class="cls-1" data-name="Path 5160" transform="translate(0 -38.25)"/>
+        </g>
+    </g>
+</svg>

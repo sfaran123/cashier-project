@@ -1,0 +1,14 @@
+<app-data-table [columns]="columns" [hasActionsHeader]="true" (fetchItems)="fetchItems()">
+<div class="data-table-menus">
+	<div>
+		<button mat-flat-button class="pink-btn" routerLink="../form">פריט חדש</button>
+	</div>
+</div>
+	<tr *ngFor="let item of dataTable.items">
+		<td>{{ item.name }}</td>
+		<td class="row-icons">
+			<i class="fa fa-pencil-alt ml-2" [routerLink]="['./', 'form', item.id]"></i>
+			<i class="fa fa-trash" (click)="deleteItem(item.id)"></i>
+		</td>
+	</tr>
+</app-data-table>

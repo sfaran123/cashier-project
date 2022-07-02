@@ -1,0 +1,6 @@
+<div id="overlay" *ngIf="isLoading"></div>
+<img src="/assets/img/spinner.gif" id="spinner" [@fade]="isLoading ? 'active' : 'inactive'">
+<app-header></app-header>
+<div id="content">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,15 @@
+<app-data-table [tableName]="'ITEM_GROUPS'"  [columns]="columns" (fetchItems)="fetchItems()">
+  <div class="text-left new-item-btn">
+    <button mat-button class="main-btn" routerLink="./form">{{ 'NEW_GROUP_ITEMS' | t }}</button>
+  </div>
+  <tr *ngFor=" let item of dataTable.items">
+    <td>{{ item.id }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.itemsCount }}</td>
+    <td></td>
+    <td class="row-actions">
+      <i class="fa fa-pencil-alt" [routerLink]="['./form', item.id]"></i>
+      <i class="fa fa-trash" (click)="deleteGroup(item.id)"></i>
+    </td>
+  </tr>
+</app-data-table>

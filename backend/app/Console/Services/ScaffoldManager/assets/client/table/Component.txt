@@ -1,0 +1,42 @@
+import { Component, ViewChild } from '@angular/core';
+
+import { DataTableComponent } from 'src/app/_shared/components/data-table/data-table.component';
+
+import { NotificationService } from 'src/app/_shared/services/generic/notification.service';
+import { CompanySelectService } from 'src/app/_shared/services/state/company-select.service';
+import { UcModelService } from 'src/app/_shared/services/http/lcModel.service';
+
+@Component({
+	selector: 'app-lcModels',
+	templateUrl: './lcModels.component.html'
+})
+export class UcModelComponent {
+
+	@ViewChild(DataTableComponent, { static: true }) dataTable: DataTableComponent;
+
+	readonly columns = [
+		{ name: 'name', label: 'שם' }
+	];
+
+	constructor(private companySelect: CompanySelectService,
+				private notification: NotificationService,
+				private lcModelService: UcModelService) {}
+
+	fetchItems(): void {
+		const companyId = this.companySelect.getSelectedCompanyId();
+		this.lcModelService.getUcModels(this.dataTable.criteria, companyId).then(response => {
+			this.dataTable.setItems(response);
+		});
+	}
+
+	deleteItem(lcModelId: number): void {
+		this.notification.warning().then(confirmation => {
+			if (confirmation.value) {
+				this.lcModelService.deleteUcModel(lcModelId).then(() => {
+					this.notification.success();
+					this.fetchItems();
+				});
+			}
+		});
+	}
+}

@@ -1,0 +1,28 @@
+<p class="title"> {{'NEW_POINT_OF_SALE' | t }} </p>
+
+<form [formGroup]="posForm" (ngSubmit)="submit()" class="mt-2">
+  <div class="d-flex justify-content-between mt-4">
+  <div>
+    <button mat-button class="main-btn" type="submit">{{ 'SAVE' | t }}</button>
+  </div>
+  </div>
+  <div class="card bg-light py-3 px-5 mt-4">
+    <mat-form-field>
+      <input matInput [placeholder]="'POS_NAME' | t" formControlName="name" type="text">
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [placeholder]="'INTERNAL_NUMBER' | t" formControlName="internalNumber" type="text">
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [placeholder]="'DECIMAL_CIRCLE' | t" formControlName="decimalCircle" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [placeholder]="'MAX_SALE_AMOUNT' | t" formControlName="maxSaleAmount" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [placeholder]="'LIMIT_SALE_AMOUNT' | t" formControlName="limitSaleAmount" type="number">
+    </mat-form-field>
+  </div>
+</form>

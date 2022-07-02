@@ -1,0 +1,15 @@
+<app-data-table tableName="EMPLOYEES" [columns]="columns" (fetchItems)="fetchItems()">
+  <div class="text-left new-item-btn">
+    <button mat-button class="main-btn" routerLink="./form">{{ 'NEW_EMPLOYEE' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{ item.name }}</td>
+    <td>{{ item.cardNumber }}</td>
+    <td>{{ item.phone }}</td>
+    <td>{{ (item.isActive ? 'ACTIVE'  : 'INACTIVE') | t }}</td>
+    <td class="row-actions">
+      <i class="fa fa-pencil-alt" [routerLink]="['./form', item.id]"></i>
+      <i class="fa fa-trash" (click)="deleteEmployee(item)"></i>
+    </td>
+  </tr>
+</app-data-table>

@@ -1,0 +1,15 @@
+<app-data-table [columns]="columns" [hasActionsHeader]="true" [tableName]="'INSTRUCTIONS' | t" (fetchItems)="fetchItems()">
+  <div class="table-header text-left">
+    <button mat-button class="main-btn" (click)="openDialog()">{{ 'NEW_INSTRUCTION' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{ item.name }}</td>
+    <td>
+      <div [ngStyle]="{ backgroundColor: item.color }" class="h25-p"></div>
+    <td>{{ (item.isDefault ? 'YES' : 'NO') | t }}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" class="fa fa-pencil-alt" (click)="openDialog(item)"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="deleteInstruction(item.id)"></i>
+    </td>
+  </tr>
+</app-data-table>

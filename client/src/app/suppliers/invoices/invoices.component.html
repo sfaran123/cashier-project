@@ -1,0 +1,22 @@
+<app-data-table [tableName]="'INVOICES_LIST' | t" [columns]="columns" [hasActionsHeader]="true" (fetchItems)="fetchItems()">
+  <div class="text-left new-item-btn">
+    <button mat-button class="main-btn" routerLink="./form">{{ 'NEW_INVOICE' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+<!--    <td>{{item.store}}</td>-->
+    <td>{{ item.supplier }}</td>
+    <td>{{ item.date }}</td>
+    <td>{{ item.sum }}</td>
+    <td>{{ item.reference }}</td>
+    <td>{{ item.status }}</td>
+    <td>{{ documentTypes[item.type] }}</td>
+    <td>{{ item.paymentStatus }}</td>
+    <td>{{ item.paymentDate }}</td>
+    <td>{{ item.paymentType }}</td>
+    <td>{{ item.centralInvoiceNumber }}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" *ngIf="item.status !== 'LOCKED'" class="fa fa-pencil-alt ml-3" [routerLink]="['./form', item.id]"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="deleteInvoice(item.id)"></i>
+    </td>
+  </tr>
+</app-data-table>

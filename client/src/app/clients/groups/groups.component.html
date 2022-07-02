@@ -1,0 +1,13 @@
+<app-data-table tableName="CLIENT_GROUPS" [columns]="columns" (fetchItems)="fetchItems()">
+  <div class="text-left new-item-btn">
+    <button mat-button class="main-btn" (click)="openGroupDialog()">{{ 'ADD_GROUP' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{ item.name }}</td>
+    <td>{{ item.memebersCount }}</td>
+    <td class="row-actions">
+      <i class="fa fa-pencil-alt" (click)="openGroupDialog(item)"></i>
+      <i class="fa fa-trash" (click)="deleteClient(item)"></i>
+    </td>
+  </tr>
+</app-data-table>

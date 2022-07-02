@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <p class="text-right title f-18">{{ category ? category.name : 'NEW_CATEGORY' | t }}</p>
+  <div class="text-left">
+    <button mat-flat-button class="main-btn" type="submit">{{ (category ? 'UPDATE' : 'SAVE') | t }}</button>
+  </div>
+  <div class="card bg-light mt-3">
+    <div class="card-header bold">{{ 'CATEGORY_DETAILS' }}</div>
+    <div class="p-4 d-flex">
+      <mat-form-field class="w-50">
+        <input matInput type="text" [placeholder]="'CATEGORY_NAME' | t" formControlName="name" required>
+        <mat-error>{{ errorMessages.required | t}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="mr-5 w-50">
+        <input matInput type="text" [placeholder]="'CATEGORY_NUMBER' | t" formControlName="number" required>
+        <mat-error>{{ errorMessages.required | t}}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="card bg-light mt-4">
+    <div class="card-header bold">{{ 'SUB_CATEGORY_SECTION' | t }}</div>
+    <div class="py-3 px-5" formArrayName="subCategories">
+      <div class="text-left">
+        <img [src]="plus" class="icon" [matTooltip]="'NEW_SUB_CATEGORY' | t" (click)="addSubCategory()">
+      </div>
+      <div class="d-flex" *ngFor="let subCategory of subCategories.controls; let index = index" [formGroupName]="index">
+        <mat-form-field class="w-50">
+          <input matInput type="text" [placeholder]="'SUB_CATEGORY_NAME' | t" formControlName="name" required>
+          <mat-error>{{ errorMessages.required | t }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="mr-5 w-50">
+          <input matInput type="text" [placeholder]="'SUB_CATEGORY_NUMBER' | t" formControlName="number" required>
+          <mat-error>{{ errorMessages.required | t }}</mat-error>
+        </mat-form-field>
+        <div class="mr-3 mt-4">
+          <img [src]="trash" class="icon text-left" (click)="removeSubCategory(index)">
+        </div>
+      </div>
+      <p class="f-18 bold text-center" *ngIf="subCategories.controls.length === 0">{{ 'SUB_CATEGORIES_NOT_ADDED_YET' | t }}</p>
+    </div>
+  </div>
+</form>

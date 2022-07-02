@@ -1,0 +1,61 @@
+<p class="title"> NEW_COMPANY </p>
+
+<form [formGroup]="companyForm" (ngSubmit)="submit()" class="mt-2">
+  <div class="d-flex justify-content-between mt-4">
+  <div>
+    <button mat-button class="main-btn" type="submit">{{ 'SAVE' | t }}</button>
+  </div>
+  </div>
+  <div class="d-flex mt-4">
+    <div class="card bg-light py-3 px-5 w-50">
+      <mat-form-field>
+        <input matInput [placeholder]="'CONNECTION_TERMINAL_NUMBER' | t" formControlName="connectionTerminalNumber" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'COMPANY_NAME' | t " formControlName="companyName" type="text">
+        <mat-error>{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'COMPANY_CATEGORY' | t" formControlName="companyCategory" type="text">
+        <mat-error>{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'BUSINESS_ID' | t" formControlName="businessId" type="text">
+        <mat-error>{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select matInput [placeholder]="'BUSINESS_TYPE' | t" formControlName="businessType">
+          <mat-option  *ngFor="let type of businessTypes" [value]="type.value">{{ type.label }}</mat-option>
+        </mat-select>
+        <mat-error>{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'DATA_BASE_PASSWORD' | t" formControlName="dataBasePass" type="password">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'CONFIRM_DATA_BASE_PASSWORD'" formControlName="confirmDataBasePass" type="password">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'DEFAULT_CURRENCY'" formControlName="defaultCurrency" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'PROFIT_CALCULATION_METHOD'" formControlName="profitCalculationMethod" type="text">
+      </mat-form-field>
+    </div>
+    <div class="card bg-light py-3 px-5 w-50 mr-4 justify-content-around">
+      <mat-checkbox formControlName="hasSubItemReport">{{ 'HAS_SUB_ITEM_REPORT' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="limitShippingDocumentS">{{ 'LIMIT_SHIPPING_DOCUMENTS' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="includeSubItemProfit">{{ 'INCLUDE_SUB_ITEM_REPORT' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="isTaxFree">{{ 'IS_TAX_FREE' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="hasItemsAutoCounting">{{ 'HAS_ITEMS_AUTO_COUNTING' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="hasValueCard">{{ 'HAS_VALUE_CARD' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="hasPinPad">{{ 'HAS_PIN_PAD' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="SaleSellerRequire">{{ 'SALE_SELLER_REQUIRE' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="hasSeparationLines">{{ 'HAS_SEPARATION_LINES' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="autoConnectionBetweenEmployeeAndStore">{{ 'AUTO_CONNECTION_BETWEEN_EMPLOYEE_AND_STORE' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="allowMenusAmountOfItem">{{ 'ALLOW_MENUS_AMOUNT_OF_ITEM' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="documentType">{{ 'DOCUMENT_TYPE' | t}}</mat-checkbox>
+      <mat-checkbox formControlName="creditInvoicePeriod">{{ 'CREDIT_INVOICE_PERIOD' | t}}</mat-checkbox>
+    </div>
+  </div>
+</form>

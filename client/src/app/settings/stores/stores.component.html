@@ -1,0 +1,17 @@
+<app-data-table tableName="{{ 'STORES' | t }}" [columns]="columns" [isSelectable]="true" (fetchItems)="fetchItems()">
+  <div class="text-left new-item-btn">
+    <button mat-button class="main-btn" (click)="newStore()">{{ 'NEW_STORE' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{item.id}}</td>
+    <td>{{item.storeName}}</td>
+    <td>{{item.address}}</td>
+    <td>{{item.businessId}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.businessType}}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" class="fa fa-pencil-alt" [routerLink]="['/settings', 'store-form', item.id]"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="delete(item)"></i>
+    </td>
+  </tr>
+</app-data-table>

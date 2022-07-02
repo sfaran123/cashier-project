@@ -1,0 +1,54 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { CompanySelectService } from 'src/app/_shared/services/state/company-select.service';
+import { UcModelService } from 'src/app/_shared/services/http/lcModel.service';
+
+import { ErrorMessages } from 'src/app/_shared/constants/error-messages';
+import { UcModelModel } from 'src/app/_shared/models/lcModel.model';
+
+@Component({
+	selector: 'app-form',
+	templateUrl: './form.component.html'
+})
+export class FormComponent implements OnInit {
+
+	readonly errorMessages = ErrorMessages;
+
+	lcModel: UcModelModel;
+
+	isSubmitting = false;
+
+	constructor(private router: Router, private route: ActivatedRoute,
+				private companySelect: CompanySelectService,
+				private lcModelService: UcModelService) {}
+
+	ngOnInit(): void {
+		const routeData = this.route.snapshot.data;
+
+		this.lcModel = routeData.lcModel ? routeData.lcModel : new UcModelModel();
+	}
+
+	submit(form: NgForm): void {
+		if (form.valid)
+
+			this.isSubmitting = true;
+
+			if (this.lcModel.id) {
+				this.lcModelService.updateUcModel(this.lcModel.id, form.value).then(response => this.handleServerResponse(response));
+			} else {
+				const companyId = this.companySelect.getSelectedCompanyId();
+				this.lcModelService.newUcModel(form.value, companyId).then(response => this.handleServerResponse(response));
+			}
+		}
+	}
+
+	private handleServerResponse(response: boolean): void {
+		if (response) {
+			this.router.navigate(['/platform', 'lcModels']);
+		}
+
+		this.isSubmitting = false;
+	}
+}

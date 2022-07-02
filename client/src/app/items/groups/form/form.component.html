@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="d-flex justify-content-between mb-3">
+    <p class="title">{{ group ? group.name : 'NEW_GROUP' | t }}</p>
+    <div>
+      <button mat-button class="main-btn" type="submit">{{ (group ? 'UPDATE' : 'SAVE') | t }}</button>
+    </div>
+  </div>
+  <div class="card bg-light">
+    <div class="card-header bold">{{ 'GROUP_DETAILS' | t }}</div>
+    <mat-form-field class="p-3">
+      <input matInput type="text" placeholder="{{ 'GROUP_NAME' | t }}" formControlName="name">
+      <mat-error>{{ errorMessages.required | t }}</mat-error>
+    </mat-form-field>
+  </div>
+  <p class="bold mt-4">{{ 'HERE_YOU_CAN_ASSIGN_ITEMS_TO_THIS_GROUP' | t }}</p>
+  <button mat-button class="main-btn" type="button" (click)="addItem()">{{ 'ADD_ITEM' | t }}</button>
+  <div formArrayName="items" cdkDropList class="dnd-list mt-3" (cdkDropListDropped)="drop($event)">
+    <div class="dnd-box d-flex align-items-center w-fit-content" *ngFor="let item of items.controls; let i = index" [formGroupName]="i" cdkDrag>
+      <i cdkDragHandle class="fa fa-bars ml-3 grey-text pointer"></i>
+<!--      <bd-select formControlName="code" [placeholder]="'ITEM_CODE' | t" (selected)="onSelect(i, $event, 'name')">-->
+<!--        <bd-option *ngFor="let item of selectItems" [value]="item.id">{{ item.code }}</bd-option>-->
+<!--      </bd-select>-->
+<!--      TODO replace with bd select-->
+      <mat-form-field>
+        <mat-select [placeholder]="'ITEM_CODE' | t" formControlName="code" (selectionChange)="selectItem(i, $event.value, 'name')">
+          <mat-option *ngFor="let item of selectItems" [value]="item.id">{{ item.code }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mr-5">
+        <mat-select [placeholder]="'ITEM_DESCRIPTION' | t" formControlName="name" (selectionChange)="selectItem(i, $event.value, 'code')">
+          <mat-option *ngFor="let item of selectItems" [value]="item.name">{{ item.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mr-5">
+        <input matInput type="number" [placeholder]="'PRICE' | t" formControlName="price">
+      </mat-form-field>
+      <i [matTooltip]="'DELETE_ITEM' | t" class="fa fa-trash pointer primary-text-color mr-4" (click)="removeGroup(i)"></i>
+    </div>
+  </div>
+</form>

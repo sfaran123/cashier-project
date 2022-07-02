@@ -1,0 +1,46 @@
+<div class="mb-3 mb-lg-0 text-center text-lg-right">
+  <span>
+    <span>מציג</span>
+    <span class="bold">{{ getCurrentItems() }} - {{ getMaxShownItems() }}</span>
+    <span>מתוך</span>
+    <span class="bold">{{ data.totalItems }}</span>
+    <span>רשומות</span>
+  </span>
+</div>
+<ul id="pages" class="d-flex justify-content-center">
+  <li>
+    <a class="page-link" routerLink="./" [queryParams]="{ page: 1 }">
+      <i class="fa fa-angle-double-right"></i>
+    </a>
+  </li>
+  <li>
+    <a class="page-link" routerLink="./" [queryParams]="{ page: data.currentPage - 1 > 0 ? data.currentPage - 1 : 1 }">
+      <i class="fa fa-angle-right"></i>
+    </a>
+  </li>
+  <li *ngIf="data.currentPage - 2 >= 1">
+    <a class="page-link" routerLink="./" [queryParams]="{ page: data.currentPage - 2 }">{{ data.currentPage - 2 }}</a>
+  </li>
+  <li *ngIf="data.currentPage - 1 >= 1">
+    <a class="page-link" routerLink="./" [queryParams]="{ page: data.currentPage - 1 }">{{ data.currentPage - 1 }}</a>
+  </li>
+  <li>
+    <a class="page-link active">{{ data.currentPage }}</a>
+  </li>
+  <li *ngIf="data.currentPage + 1 <= data.totalPages">
+    <a class="page-link" routerLink="./" [queryParams]="{ page: data.currentPage + 1 }">{{ data.currentPage + 1 }}</a>
+  </li>
+  <li *ngIf="data.currentPage + 2 <= data.totalPages">
+    <a class="page-link" routerLink="./" [queryParams]="{ page: data.currentPage + 2 }">{{ data.currentPage + 2 }}</a>
+  </li>
+  <li>
+    <a class="page-link" routerLink="./" [queryParams]="{ page: data.currentPage + 1 <= data.totalPages ? data.currentPage + 1 : data.currentPage }">
+      <i class="fa fa-angle-left"></i>
+    </a>
+  </li>
+  <li>
+    <a class="page-link" routerLink="./" [queryParams]="{ page: data.totalPages }">
+      <i class="fa fa-angle-double-left"></i>
+    </a>
+  </li>
+</ul>

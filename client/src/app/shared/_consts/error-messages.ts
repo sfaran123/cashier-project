@@ -1,0 +1,6 @@
+export const ErrorMessages = {
+  required: 'REQUIRED_FIELD',
+  percent: 'PERCENT_NUMBER_VALIDATION_ERROR',
+  email: 'INVALID_EMAIL_ADDRESS_VALIDATION_ERROR',
+  idValidator: 'ISRAEL_ID_VALIDATION_ERROR_MESSAGE'
+};

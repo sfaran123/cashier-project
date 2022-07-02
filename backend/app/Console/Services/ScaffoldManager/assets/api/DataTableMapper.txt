@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Mappers\DataTable;
+
+class UcModelMapper
+{
+	public static function map()
+	{
+		return [
+			'id'	=> 'id',
+			'name'	=> 'name'
+		];
+	}
+}

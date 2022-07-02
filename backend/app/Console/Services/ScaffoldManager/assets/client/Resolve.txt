@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+
+import { UcModelService } from 'src/app/_shared/services/http/lcModel.service';
+
+import { UcModelModel } from 'src/app/_shared/models/lcModel.model';
+
+@Injectable()
+export class UcModelResolve implements Resolve<UcModelModel> {
+
+	constructor(private lcModelService: UcModelService) {}
+
+	resolve(snapshot: ActivatedRouteSnapshot) {
+		const lcModelId = +snapshot.params.id;
+		return this.lcModelService.getUcModel(lcModelId).then(response => response as UcModelModel);
+	}
+}

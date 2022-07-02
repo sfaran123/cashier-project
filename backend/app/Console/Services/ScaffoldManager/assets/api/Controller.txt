@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Services\DataTableManager;
+
+class UcModelController extends Controller
+{
+    public function index(Request $request)
+    {
+		$companyId = $request->get('companyId');
+
+		$query = UcModel::where('company_id', $companyId);
+
+		$paginator = DataTableManager::getInstance($query, $request->all(), UcModelMapper::map())->getQuery();
+
+		return response([
+			'items'     => UcModelsResource::collection(collect($paginator->items())),
+			'total'     => $paginator->total(),
+			'lastPage'  => $paginator->lastPage()
+		], 200);
+    }
+
+	public function store(Request $request)
+	{
+		$values = UcModelRequestMapper::map($request);
+		$companyId = $request->input('companyId');
+
+		UcModel::createInstance($values, $companyId);
+
+		return response(['message' => 'UcModel created.'], 201);
+	}
+
+	public function show(UcModel $lcModel)
+	{
+		return response(new UcModelResource($lcModel));
+	}
+
+	public function update(Request $request, UcModel $lcModel)
+	{
+		$values = UcModelRequestMapper::map($request);
+
+		$lcModel->updateInstance($values);
+
+		return response(['message' => 'UcModel updated.'], 200);
+	}
+
+	public function destroy(UcModel $lcModel)
+	{
+		$lcModel->delete();
+
+		return response(['message' => 'UcModel deleted.'], 200);
+	}
+}

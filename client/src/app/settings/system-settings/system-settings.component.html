@@ -1,0 +1,121 @@
+<div class="container mt-lg-5">
+  <div class="row">
+<div class="w-100 ">
+  <div class="col-md-6">
+  <p class="text-right title">פרטי חברה</p>
+  <p class="sub-title text-right">פרמטרים כללים</p>
+  </div>
+</div>
+  </div>
+  <div class="row">
+  <form  [formGroup]="form">
+    <div class="col-md-12">
+      <table class=" bg-black rounded border-0 table  table-hover">
+        <tr>
+          <td>קוד חברה</td>
+          <td>
+            <input class="input" formControlName="companyCode">
+          </td>
+        </tr>
+        <tr>
+          <td>שם חברה</td>
+          <td>
+            <input formControlName="companyName">
+          </td>
+        </tr>
+        <tr>
+          <td>קטגוריה חברה</td>
+          <td>
+            <input formControlName="companyCategory">
+          </td>
+        </tr>
+        <tr>
+          <td>מספר טלפון שממנו ישלחו הודעות סמס - בלי מקף! רק ספרות לרשום</td>
+          <td>
+            <input formControlName="messengerPhone">
+          </td>
+        </tr>
+        <tr>
+          <td>יתרת הודעות SMS</td>
+          <td>
+            <input formControlName="messagesBalance">
+          </td>
+        </tr>
+        <tr>
+          <td>האם כמות סמסים מתחדשת כל חודש?</td>
+          <td>
+            <input formControlName="isMessagesRenewed" type="checkbox">
+          </td>
+        </tr>
+        <tr>
+          <td>ספרור אוטומטי קוד פריט</td>
+          <td>
+            <input formControlName="automaticItemCounting" type="number">
+          </td>
+        </tr>
+        <tr>
+          <td>האם חברה של קופה רושמת?</td>
+          <td>
+            <input formControlName="isPosCompany" type="checkbox">
+          </td>
+        </tr>
+        <tr>
+          <td>האם להגדיר כרטיס נטען?</td>
+          <td>
+            <input formControlName="IsRechargeableCard" type="checkbox">
+          </td>
+        </tr>
+        <tr>
+          <td>החלפת סיסמה בכוח כל כמה חודשים?</td>
+          <td>
+            <input formControlName="isForcePassChange" type="text">
+          </td>
+        </tr>
+        <tr>
+          <td>האם לבדוק מספר לקוח הקפה יחודי?</td>
+          <td>
+            <input formControlName="isUniqueCustomer" type="checkbox">
+          </td>
+        </tr>
+        <tr>
+          <td>האם יש לחברה חנות אינטרנטית?</td>
+          <td><input formControlName="hasOnlineSore" type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>מספר טלפון תמיכה</td>
+          <td>
+            <input formControlName="supportNumber" type="number">
+          </td>
+        </tr>
+        <tr>
+          <td>חברה עובדת עם מסופון</td>
+          <td>
+            <input formControlName="hasCreditTerminal" type="number">
+          </td>
+        </tr>
+        <tr>
+          <td>מאפייני פריט - בחירה מרובה. יש להחזיק את מקש ctrl בכדי לבחור מספר ערכים:</td>
+          <td>
+            <textarea formControlName="itemProperties"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>הגדרת חישוב רווח</td>
+          <td>
+            <input formControlName="profitCalculationSetting" type="text">
+          </td>
+        </tr>
+        <tr>
+          <td>ממשק פריורטי</td>
+          <td>
+            <input formControlName="priorityInterface" type="text">
+          </td>
+        </tr>
+
+      </table>
+      <div>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>

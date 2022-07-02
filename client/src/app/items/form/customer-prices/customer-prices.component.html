@@ -1,0 +1,20 @@
+<form [formGroup]="pricesForm" class="mt-4 w-50">
+  <p class="mt-5 bold border-bottom">{{ 'PRICE_LIST_PER_ITEM_ACCORDING_TO_CUSTOMER' | t }}</p>
+  <i class="fa fa-plus primary-text-color pointer" [matTooltip]="'ADD_PRICE' | t" (click)="addCustomerPrice()"></i>
+  <div class="d-flex flex-column p-2" formArrayName="prices">
+    <div class="d-flex align-items-baseline" *ngFor="let customerPrice of prices.controls; let i = index" [formGroupName]="i">
+      <mat-form-field>
+        <mat-select matInput [placeholder]="'SELECT_CUSTOMER' | t" formControlName="customerId">
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</mat-option>
+        </mat-select>
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="mr-3">
+        <input matInput [placeholder]="'PRICE' | t" formControlName="price" type="text" required>
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <i class="fa fa-trash primary-text-color pointer mr-3" (click)="removeCustomerPrice(i)"></i>
+    </div>
+    <p *ngIf="prices.controls.length === 0">{{ 'NO_CUSTOMER_PRICE_ADDED' }}</p>
+  </div>
+</form>

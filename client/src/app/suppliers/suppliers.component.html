@@ -1,0 +1,17 @@
+<app-data-table [tableName]="'SUPPLIERS_LIST' | t" [columns]="columns" [hasActionsHeader]="true" (fetchItems)="fetchItems()">
+  <div class="text-left new-item-btn">
+    <button mat-button class="main-btn" routerLink="./form">{{ 'NEW_SUPPLIER' | t }}</button>
+  </div>
+  <tr *ngFor="let item of dataTable.items">
+    <td>{{item.id}}</td>
+    <td>{{item.internalNumber}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.category}}</td>
+    <td>{{item.agent}}</td>
+    <td>{{item.office}}</td>
+    <td class="row-actions">
+      <i [matTooltip]="'EDIT' | t" class="fa fa-pencil-alt" [routerLink]="['/suppliers', 'form', item.id]"></i>
+      <i [matTooltip]="'DELETE' | t" class="fa fa-trash" (click)="deleteSupplier(item.id)"></i>
+    </td>
+  </tr>
+</app-data-table>

@@ -1,0 +1,24 @@
+<form [formGroup]="posForm" (ngSubmit)="submit()" class="mt-2">
+  <div class="d-flex justify-content-between mt-4">
+    <div>
+      <button mat-button class="main-btn" type="submit">  save</button>
+    </div>
+  </div>
+  <p>give me tow numbers and will return the mult of the tow numbers</p>
+  <div class="card bg-light py-3 px-5 mt-4">
+    total: number;
+
+
+    <mat-form-field>
+      <input matInput [placeholder]="'number 1' | t" formControlName="number1" type="text">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [placeholder]="'number 2' | t" formControlName="number2" type="text">
+    </mat-form-field>
+
+
+  </div>
+</form>
+
+<p> {{total}}</p>

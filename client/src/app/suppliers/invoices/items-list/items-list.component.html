@@ -1,0 +1,78 @@
+<div class="d-flex mt-4">
+  <bd-select [(ngModel)]="selectedItem" [shownValue]="selectedItem?.name" [placeholder]="'SELECT_ITEMS'">
+    <bd-option *ngFor="let item of items" [value]="item">
+      <div>
+        <span class="grey-text">{{ 'CODE' | t }}: </span>
+        <span>{{ item.code }}</span>
+      </div>
+      <div>
+        <span class="grey-text">{{ 'DESCRIPTION' | t }}: </span>
+        <span>{{ item.name }}</span>
+      </div>
+    </bd-option>
+  </bd-select>
+  <div class="mr-5 mt-2">
+    <button [disabled]="!selectedItem" mat-button class="main-btn" (click)="addItem()" type="button">{{ 'ADD_ITEM' | t }}</button>
+  </div>
+</div>
+<table [formGroup]="documentForm" class="items-table table-bordered mt-5">
+  <thead>
+    <tr>
+      <th>{{ 'CODE' | t }}</th>
+      <th>{{ 'DESCRIPTION' | t }}</th>
+      <th>{{ 'BARCODE' | t }}</th>
+      <th>{{ 'AMOUNT' | t }}</th>
+      <th>{{ 'PRICE' | t }}</th>
+      <th>{{ 'DISCOUNT' | t }}</th>
+      <th>{{ 'SUM' | t }}</th>
+      <th>{{ 'ACTIONS' | t }}</th>
+    </tr>
+  </thead>
+  <tbody formArrayName="selectedItems">
+    <tr *ngFor="let item of selectedItems.controls; let i = index" [formGroupName]="i">
+      <td>{{ item.value.code }}</td>
+      <td>{{ item.value.name }}</td>
+      <td>
+        <bd-select class="w-100 mb-3" [placeholder]="'BARCODE'" (selected)="setInventoryId(i, $event)" [shownValue]="selectedItems.at(i).get('inventory').value?.barcode" formControlName="inventory">
+          <bd-option *ngFor="let inventory of inventories(i).controls" [value]="inventory.value">
+            <div>
+              <span class="grey-text">{{ 'BARCODE' | t }}: </span>
+              <span>{{ inventory.value.barcode }}</span>
+            </div>
+            <div *ngIf="inventory.value.color">
+              <span class="grey-text">{{ 'COLOR' | t }}: </span>
+              <span>{{ inventory.value.color }}</span>
+            </div>
+            <div *ngIf="inventory.value.size">
+              <span class="grey-text">{{ 'SIZE' | t }}: </span>
+              <span>{{ inventory.value.size }}</span>
+            </div>
+          </bd-option>
+        </bd-select>
+      </td>
+      <td>
+        <mat-form-field>
+          <input formControlName="amount" matInput (keyup)="setSum(i)" [placeholder]="'AMOUNT' | t" type="number">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input formControlName="price" (keyup)="setSum(i)" matInput [placeholder]="'PRICE' | t" type="number">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input formControlName="discount" (keyup)="setSum(i)" matInput [placeholder]="'DISCOUNT' | t" type="number">
+        </mat-form-field>
+      </td>
+      <td>{{ selectedItems.at(i).get('sum').value | number: '1.2-2' }}</td>
+      <td>
+        <i class="fa fa-trash pointer primary-text-color" (click)="removeItem(i)"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="bold p-3 text-center border" *ngIf="selectedItems.controls.length === 0">{{ 'NO_ITEMS_ADDED_YET' | t }}</p>
+
+
+

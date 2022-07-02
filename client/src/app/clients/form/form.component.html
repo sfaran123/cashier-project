@@ -1,0 +1,91 @@
+<p class="f-18 title"> {{ client ? client.firstName + ' ' + client.lastName : 'NEW_DEFERRED_PAY_CUSTOMER' | t }}</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="text-left mb-3">
+    <button mat-button class="main-btn" type="submit">{{ (client ? 'UPDATE' : 'SAVE') | t  }}</button>
+  </div>
+  <div class="d-flex">
+    <div class="card p-4 w-50">
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="('ID_NUMBER' | t) + '/' + ('BUSINESS_ID' | t )" formControlName="IDNumber" required>
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'NAME' | t" formControlName="firstName" required>
+        <mat-error>{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'FAMILY' | t" formControlName="lastName" required>
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="date" [placeholder]="'BIRTH_DATE' | t" formControlName="birthDate">
+      </mat-form-field>
+    </div>
+    <div class="card p-4 w-50 mr-4">
+      <mat-form-field>
+        <input matInput type="tel" [placeholder]="'PHONE' | t" formControlName="phone">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="tel" [placeholder]="'EXTRA_PHONE' | t" formControlName="extraPhone">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'ADDRESS' | t" formControlName="address">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="email" [placeholder]="'MAIL' | t" formControlName="email" email required>
+        <mat-error *ngIf="form.get('email').errors?.required">{{ errorMessages.required }}</mat-error>
+        <mat-error *ngIf="form.get('email').errors?.email">{{ errorMessages.email }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="card w-50 p-4 mt-4">
+      <mat-form-field>
+        <input matInput type="number" [placeholder]="'OBLIGO' | t" formControlName="obligo">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" [placeholder]="'BALANCE' | t" formControlName="balance">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select matInput [placeholder]="'THE_PARENT_CUSTOMER' | t" formControlName="parentId">
+          <mat-option *ngFor="let parent of parents" [value]="parent.id">{{parent.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <bd-select class="w-100" [placeholder]="'CUSTOMER_GROUP' | t" formControlName="groupId">
+        <bd-option *ngFor="let group of groups" [value]="group.id">{{ group.name }}</bd-option>
+      </bd-select>
+      <mat-form-field>
+        <mat-select matInput [placeholder]="'PRINTER_TYPE' | t" formControlName="printerType">
+          <mat-option *ngFor="let type of printerTypes" [value]="type.value">{{ type.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" [placeholder]="'DISCOUNT_PERCENTAGE' | t" formControlName="discountPercentage">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'TAG_NUMBER' | t" formControlName="tagNumber">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'EMPLOYEE_NUMBER' | t" formControlName="number">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'TERMS_OF_PAYMENT' | t" formControlName="termsOfPayment">
+      </mat-form-field>
+    </div>
+    <div class="card d-flex flex-column justify-content-around w-50 p-3 mt-4 mr-4">
+        <mat-checkbox formControlName="isShippingDocument">{{ 'WITH_SHIPPING_DOCUMENT' | t }}</mat-checkbox>
+        <mat-checkbox formControlName="hasObligoRenews">{{ 'HAS_OBLIGO_RENEWS' | t }}</mat-checkbox>
+        <mat-checkbox formControlName="isLocked">{{ 'LOCKED_CUSTOMER' | t }}</mat-checkbox>
+        <mat-checkbox formControlName="isBlocked">{{ 'BLOCKED_CUSTOMER' | t }}</mat-checkbox>
+        <mat-checkbox formControlName="isElatResident">{{ 'RESIDENT_OF_EILAT' | t }}</mat-checkbox>
+        <mat-checkbox formControlName="customPriceAllowed">{{ 'CUSTOMER_CAN_GET_HIS_OWN_PRICE_LIST' | t }}</mat-checkbox>
+        <mat-checkbox (change)="changeParentStatus($event.checked)" formControlName="isParent" class=" ml-lg-4">{{'IS_PARENT_CUSTOMER' | t }}
+        </mat-checkbox>
+    </div>
+  </div>
+  <div class="card p-4 mt-4">
+    <mat-form-field>
+      <textarea matInput formControlName="comment" [placeholder]="'COMMENTS' | t" rows="5"></textarea>
+    </mat-form-field>
+  </div>
+</form>

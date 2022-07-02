@@ -1,0 +1,84 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="mb-3">
+    <p class="f-18">מבצע חדש</p>
+    <mat-form-field class="mb-2">
+      <input matInput type="text" placeholder="שם" formControlName="name" required>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mb-2">
+      <mat-select matInput placeholder="סוג מבצע" formControlName="type"
+                  (selectionChange)="getCampaignType($event.value)">
+        <mat-option [value]="'fixedDiscountPrice'">מבצע 1</mat-option>
+        <mat-option [value]="'discountItemNumberY'">מבצע 2</mat-option>
+        <mat-option [value]="'discountOnCheapestItem'">מבצע 3</mat-option>
+        <mat-option [value]="'generalDiscount'">4 מבצע</mat-option>
+        <mat-option [value]="'discountByWeight'">מבצע 5</mat-option>
+      </mat-select>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <!--    require bendavidovich inspection: -->
+    <div [ngSwitch]="campaignType">
+      <div *ngSwitchCase="'fixedDiscountPrice'">
+        <app-fixed-discount-price></app-fixed-discount-price>
+      </div>
+      <div *ngSwitchCase="'discountItemNumberY'">
+        <app-discount-item-number-y></app-discount-item-number-y>
+      </div>
+      <div *ngSwitchCase="'discountOnCheapestItem'">
+        <app-discount-on-cheapest-item></app-discount-on-cheapest-item>
+      </div>
+      <div *ngSwitchCase="'generalDiscount'">
+        <app-general-discount></app-general-discount>
+      </div>
+      <div *ngSwitchCase="'discountByWeight'">
+        <app-fixed-discount-price></app-fixed-discount-price>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="w-50 pl-3">
+      <mat-form-field class="mb-2">
+        <input matInput type="date" placeholder="המבצע פעיל מתאריך:" formControlName="activeFrom" required>
+        <mat-error>{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="w-50 pl-3">
+      <mat-form-field class="mb-2">
+        <input matInput type="date" placeholder="עד תאריך:" formControlName="activeAt" required>
+        <mat-error>{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="mb-3">
+    <mat-form-field class="mb-2">
+      <mat-select matInput multiple placeholder="חנויות שבהן המבצע יפעל:" formControlName="stores" required>
+        <mat-option>חנות 1</mat-option>
+        <mat-option>חנות 2</mat-option>
+        <mat-option>חנות 3</mat-option>
+      </mat-select>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <mat-checkbox class="" formControlName="isActive">מבצע פעיל - אם לא מסומן אז המבצע לא יופעל בקופה</mat-checkbox>
+    <br>
+    <mat-checkbox class="" formControlName="onlyClubCustomer">המבצע פעיל לחברי מועדון בלבד</mat-checkbox>
+    <br>
+    <mat-checkbox class="" formControlName="isAutoActive">המבצע מופעל בצורה אוטמטית - אם תיבה זו לא מסומנת אז המערכת
+      תשאל את הקופאי האם להפעיל מבצע זה בסוף החשבון
+      המבצע פועל עבור קבוצת הלקוחות הבאה בלבד:
+    </mat-checkbox>
+    <br>
+    <mat-form-field class="mb-2">
+      <mat-select matInput multiple placeholder="המבצע פועל עבור קבוצת הלקוחות הבאה בלבד:" formControlName="stores"
+                  required>
+        <mat-option>לקוח 1</mat-option>
+        <mat-option>לקוח 2</mat-option>
+        <mat-option>לקוח 3</mat-option>
+      </mat-select>
+      <mat-error>{{ errorMessages.required }}</mat-error>
+    </mat-form-field>
+    <div class="text-left">
+      <button mat-flat-button color="primary" type="submit">שלח</button>
+      <button mat-flat-button class="btn-danger" type="submit">ביטול</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,100 @@
+<p class="f-18 title"> {{ employee ? employee.name : 'NEW_EMPLOYEE' | t }}</p>
+<form [formGroup]="employeeForm" (ngSubmit)="submit()">
+  <div class="text-left">
+    <button mat-button class="main-btn" type="submit">{{ (employee ? 'UPDATE'  : 'SAVE') | t }}</button>
+  </div>
+  <div class="d-flex mt-4">
+    <div class="card p-4 w-50">
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'ID_NUMBER' | t" formControlName="IDNumber">
+        <mat-error *ngIf="employeeForm.get('IDNumber').errors && employeeForm.get('IDNumber').errors.idValidator">{{ errorMessages.idValidator }}</mat-error>
+        <mat-error *ngIf="employeeForm.get('IDNumber').errors && employeeForm.get('IDNumber').errors.required">{{ errorMessages.required }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'EMPLOYEE_NAME' | t" formControlName="name">
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'MAGNETIC_CARD' | t" formControlName="cardNumber">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'EXTERNAL_IDENTIFICATION' | t" formControlName="externalId">
+        <mat-error>{{ errorMessages.required | t }}</mat-error>
+      </mat-form-field>
+      <mat-radio-group class="mb-2" formControlName="gender">
+        <mat-radio-button class="p-3" value="male">
+          <span class="mx-2">{{ 'MALE' | t }}</span>
+        </mat-radio-button>
+        <mat-radio-button value="female">
+          <span class="mx-2">{{ 'FEMALE' | t }}</span>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="card p-4 w-50 mr-4">
+      <mat-form-field>
+        <input matInput [placeholder]="'PHONE' | t" formControlName="phone">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [placeholder]="'ADDRESS' | t" formControlName="address">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="date" [placeholder]="'BIRTH_DATE' | t" formControlName="birthDate">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="date" [placeholder]="'WORK_START_DATE' | t" formControlName="workStartDate">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="card-header bold mt-4">{{ 'SETTINGS' | t }}</div>
+  <div class="card d-flex justify-content-around flex-row p-4">
+    <div class="d-flex flex-column">
+      <mat-checkbox class=" ml-lg-4" formControlName="isCashier">{{ 'CASHIER' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="isManager">{{ 'MANAGER' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="creditAllowed">{{ 'APPROVES_ITEM_PRICE_IN_MINUS' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="isCourier">{{ 'DELIVERY_PERSON' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="refundAllowed">{{ 'CAN_MAKE_REFUND' | t }}</mat-checkbox>
+    </div>
+    <div class="d-flex flex-column">
+      <mat-checkbox class=" ml-lg-4" formControlName="discountAllowed">{{ 'APPROVES_MANAGER_DISCOUNT' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="viewReportAllowed">{{ 'CAN_VIEW_REPORT' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="ZAllowed">{{ 'CAN_RUN_Z_REPORT' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="XAllowed">{{ 'CAN_VIEW_X_REPORT' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="deleteSaleAllowed">{{ 'CAN_DELETE_CURRENT_SALE' | t }}</mat-checkbox>
+    </div>
+    <div class="d-flex flex-column">
+      <mat-checkbox class=" ml-lg-4" formControlName="changeItemPriceAllowed">{{ 'CAN_CHANGE_ITEM_PRICE' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="isActive">{{ 'ACTIVE_EMPLOYEE' | t }}</mat-checkbox>
+      <mat-checkbox class=" ml-lg-4" formControlName="calculationByShifts">{{ 'CALCULATION_PF_HOURS_BY_SHIFTS' | t }}</mat-checkbox>
+    </div>
+  </div>
+  <div class="d-flex mt-4">
+    <div class="card w-50">
+      <div class="card-header">{{ 'BANK_DETAILS' | t }}</div>
+      <div formGroupName="bank" class="p-4">
+        <mat-form-field>
+          <input matInput type="text" [placeholder]="'BANK' | t" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" [placeholder]="'BRANCH' | t" formControlName="branch">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" [placeholder]="'BANK_ACCOUNT_NUMBER' | t" formControlName="accountNumber">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="card w-50 mr-4">
+      <div class="card-header">{{ 'CONTACT_DETAILS' | t }}</div>
+      <div class="p-4" formGroupName="contact">
+        <mat-form-field>
+          <input matInput type="text" [placeholder]="'CONTACT_NAME' | t" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" [placeholder]="'CONTACT_PHONE' | t" formControlName="phone">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" [placeholder]="'TYPE_OF_CLOSENESS' | t" formControlName="proximity">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>

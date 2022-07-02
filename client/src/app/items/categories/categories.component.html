@@ -1,0 +1,15 @@
+<div class="position-relative">
+  <app-data-table [tableName]="'CATEGORY_LIST' | t" [columns]="columns" [hasActionsHeader]="true" (fetchItems)="fetchItems()">
+    <div class="text-left new-item-btn">
+      <button class="btn main-btn" routerLink="./form">{{ 'NEW_CATEGORY' | t }}</button>
+    </div>
+    <tr *ngFor="let item of dataTable.items">
+      <td>{{item.name}}</td>
+      <td>{{item.number}}</td>
+      <td>
+        <img [src]="pencil" class="icon m-2" [routerLink]="['/items', 'categories', 'form', item.id]">
+        <img [src]="trash" class="icon m-2" (click)="delete(item.id)">
+      </td>
+    </tr>
+  </app-data-table>
+</div>

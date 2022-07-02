@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <p class="primary-text-color bold f-18 text-center">{{ instruction ? instruction.name : 'NEW_INSTRUCTION' | t }}</p>
+  <mat-form-field class="mt3">
+    <input matInput type="text" [placeholder]="'NAME' | t" formControlName="name">
+    <mat-error>{{ errorMessages.required | t }}</mat-error>
+  </mat-form-field>
+  <mat-form-field class="mt-3">
+    <input matInput type="color" [placeholder]="'BTN_COLOR' | t" formControlName="color">
+  </mat-form-field>
+  <mat-checkbox class="mt-3" formControlName="isDefault">{{ 'IS_DEFAULT' | t }}</mat-checkbox>
+  <div class="d-flex justify-content-around mt-4">
+    <button mat-flat-button class="grey-btn" mat-dialog-close>{{ 'CANCEL' | t }}</button>
+    <button mat-flat-button class="main-btn" type="submit">{{ (instruction ? 'UPDATE'  : 'SAVE') | t }}</button>
+  </div>
+</form>
